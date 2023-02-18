@@ -6,7 +6,6 @@
 #include "UObject/ObjectMacros.h"
 #include "Animation/AnimNodeBase.h"
 #include "AnimNodes/AnimNode_TwoWayBlend.h"
-
 #include "AnimNode_VictoryTurnInPlace.generated.h"
 
 // Root node of an animation tree (sink)
@@ -15,31 +14,22 @@ struct  FAnimNode_VictoryTurnInPlace : public FAnimNode_Base
 {
 	GENERATED_USTRUCT_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Links)
-	FPoseLink BasePose;
-
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links)
+		FPoseLink BasePose;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links)
-	FPoseLink TurnPose;
-
+		FPoseLink TurnPose;
 	//How Quickly to Blend In/Out of Turn Pose
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links,meta = (PinShownByDefault))
-	float TurnBlendDuration;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links, meta = (PinShownByDefault))
-	float TurnSpeedModifierMAX;
+		float TurnBlendDuration;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links, meta = (PinShownByDefault))
-
-	float TurnSensitivity;
+		float TurnSpeedModifierMAX;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links, meta = (PinShownByDefault))
-
-	float MoveSensitivity;
+		float TurnSensitivity;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links, meta = (PinShownByDefault))
-	float ShowTurnRotationChangePerTick;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links, meta = (PinShownByDefault))
-	FVector CurLoc;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Links, meta = (PinShownByDefault))
-	float CurYaw;
-
-public:	
+		float MoveSensitivity;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Logs)
+		float ShowTurnRotationChangePerTick;
+public:
 	FAnimNode_VictoryTurnInPlace();
 
 	// FAnimNode_Base interface
@@ -57,13 +47,12 @@ protected:
 protected:
 	FAnimNode_TwoWayBlend OurVeryOwnBlend;
 
+	FVector CurLoc;
+	float CurYaw;
 	AActor* OwningActor;
 	FVector PrevLoc;
 	float PrevYaw;
 	float TurnAmountThisTick;
-	bool WorldIsGame;
-
-	//Blending 
 
 	float BlendDurationMult;
 	float InternalBlendDuration;
